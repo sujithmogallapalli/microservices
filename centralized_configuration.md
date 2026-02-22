@@ -1,0 +1,56 @@
+## Centralized Configuration in Microservices
+### Why Do We Need Centralized Configuration?
+- In microservices architecture, there is a huge amount of configuration.
+- Types of Configuration
+  - External service URLs
+  - Database connection details
+  - Queue / Messaging configuration
+  - API keys
+  - Application properties
+  - Logging levels
+- When we have:
+  - 100s or 1000s of microservices
+  - Multiple environments:
+    - DEV
+    - QA
+    - STAGE
+    - PROD
+  - Multiple instances per environment
+- Configuration becomes:
+  - Hard to maintain
+  - Error-prone
+  - Difficult to synchronize
+  - Risky during production changes
+- Solution: Centralized Configuration
+- Instead of storing application.properties inside every service, we:
+  - Store configuration in a central location 
+  - Make services fetch configuration at startup
+
+### Benefits of Centralized Configuration
+- Single Source of Truth
+- All config stored in one Git repo.
+- Environment-Based Configuration
+- Separate config for:
+  - dev
+  - qa
+  - stage
+  - prod
+- Example:
+  - limits-service-dev.yml 
+  - limits-service-prod.yml
+- No Rebuild Required
+- Changing configuration does NOT require rebuilding service.
+- Version Controlled
+- Since config is in Git:
+  - Track changes
+  - Rollback easily
+  - Audit configuration updates
+- Separation of Code and Config
+- Clean architecture principle:
+  - Code should not contain environment-specific configuration
+## What I Implemented
+- Created Spring Cloud Config Server
+- Connected it to Git repository
+- Configured limits-service to fetch config from Config Server
+- Used environment-based profiles (dev/prod)
+- Tested dynamic refresh using actuator
