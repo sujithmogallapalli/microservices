@@ -53,4 +53,3 @@
 - Connected it to Git repository
 - Configured limits-service to fetch config from Config Server
 - Used environment-based profiles (dev/prod)
-- Tested dynamic refresh using actuator
