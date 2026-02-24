@@ -7,6 +7,7 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="currencyconversionservice" />
+        <module name="api-gateway" />
         <module name="currency-exchange-service" />
         <module name="limits-service" />
         <module name="spring-cloud-config-server" />
@@ -16,6 +17,7 @@
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="api-gateway" options="-parameters" />
       <module name="currency-exchange-service" options="-parameters" />
       <module name="currencyconversionservice" options="-parameters" />
       <module name="limits-service" options="-parameters" />
