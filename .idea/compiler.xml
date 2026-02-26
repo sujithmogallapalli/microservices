@@ -7,10 +7,12 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="currencyconversionservice" />
+        <module name="currency-conversion-service" />
+        <module name="hello-world-docker" />
+        <module name="spring-cloud-config-server" />
         <module name="api-gateway" />
         <module name="currency-exchange-service" />
         <module name="limits-service" />
-        <module name="spring-cloud-config-server" />
         <module name="naming-server" />
       </profile>
     </annotationProcessing>
@@ -18,8 +20,10 @@
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="api-gateway" options="-parameters" />
+      <module name="currency-conversion-service" options="-parameters" />
       <module name="currency-exchange-service" options="-parameters" />
       <module name="currencyconversionservice" options="-parameters" />
+      <module name="hello-world-docker" options="-parameters" />
       <module name="limits-service" options="-parameters" />
       <module name="naming-server" options="-parameters" />
       <module name="spring-cloud-config-server" options="-parameters" />
