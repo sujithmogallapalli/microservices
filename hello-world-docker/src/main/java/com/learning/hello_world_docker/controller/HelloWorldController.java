@@ -9,7 +9,7 @@ public class HelloWorldController {
     @GetMapping(path = "/")
     public String helloWorld() {
         return """
-                { message: Hello World Java v3 }
+                { message: Hello World Java v5 }
                """;
     }
 
