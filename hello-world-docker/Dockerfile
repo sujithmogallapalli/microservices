@@ -1,4 +1,9 @@
+FROM maven:3.9.11-amazoncorretto-25-alpine AS build
+WORKDIR /home/app
+COPY . /home/app
+RUN mvn -f /home/app/pom.xml clean package
+
 FROM amazoncorretto:25
-COPY target/*.jar app.jar
 EXPOSE 5000
-ENTRYPOINT ["java","-jar","/app.jar"]
+COPY --from=build /home/app/target/*.jar app.jar
+ENTRYPOINT [ "sh", "-c", "java -jar /app.jar" ]
