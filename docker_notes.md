@@ -161,3 +161,106 @@ mvn spring-boot:build-image
   * Consistent environments
   * Easy scaling
   * Cloud portability
+
+## What I Did (Hands-On)
+### Manual Approach
+* Built JAR using:
+```bash
+mvn clean package
+```
+* Started service manually:
+```bash
+java -jar target/currency-exchange-service.jar
+```
+* Verified API worked on `localhost:8000`
+
+### Containerized the Same Service
+* Built Docker image.
+* Ran service inside container.
+* Verified same API works.
+* Confirmed behavior is identical.
+
+- This proves:
+  > Dockerized application behaves same as manual run.
+
+## Why Docker Compose?
+* Running 1 container is easy.
+* Running 5+ services manually is difficult.
+* Services depend on each other.
+* Need common network.
+* Need environment variables.
+- Solution → **Docker Compose**
+
+## My Docker Compose File
+
+```yaml
+version: '3.7'
+
+services:
+
+  currency-exchange:
+    image: learnings/microservices_docker-currency-exchange-service:0.0.1-SNAPSHOT
+    mem_limit: 800m
+    ports:
+      - "8000:8000"
+    networks:
+      - currency-network
+    depends_on:
+      - naming-server
+    environment:
+      EUREKA.CLIENT.SERVICEURL.DEFAULTZONE: http://naming-server:8761/eureka
+      MANAGEMENT_ZIPKIN_TRACING_ENDPOINT: http://zipkin-server:9411/api/v2/spans
+```
+## Key Concepts Demonstrated
+### Service Networking
+```yaml
+networks:
+  currency-network:
+```
+* All services share same Docker network.
+* They communicate using service names:
+  * `naming-server`
+  * `zipkin-server`
+* No need for localhost.
+
+## Service Discovery Inside Containers
+```yaml
+environment:
+  EUREKA.CLIENT.SERVICEURL.DEFAULTZONE: http://naming-server:8761/eureka
+```
+- Important:
+  * Cannot use `localhost`
+  * Must use service name inside Docker network.
+
+## Zipkin Integration in Docker
+```yaml
+MANAGEMENT_ZIPKIN_TRACING_ENDPOINT: http://zipkin-server:9411/api/v2/spans
+```
+* All services send traces to containerized Zipkin.
+* Verified tracing works inside Docker network.
+
+## Restart Policy
+```yaml
+restart: always
+```
+* Automatically restarts container if it crashes.
+* Useful for production-like setup.
+
+## Service Dependency
+```yaml
+depends_on:
+  - naming-server
+```
+* Ensures naming server starts first.
+* Prevents startup failures.
+
+## Running Docker Compose
+```bash
+docker-compose up
+```
+- Verified:
+  * Naming Server: [http://localhost:8761](http://localhost:8761)
+  * Exchange Service: [http://localhost:8000](http://localhost:8000)
+  * Conversion Service: [http://localhost:8100](http://localhost:8100)
+  * API Gateway: [http://localhost:8765](http://localhost:8765)
+  * Zipkin: [http://localhost:9411](http://localhost:9411)
