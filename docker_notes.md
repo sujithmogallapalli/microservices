@@ -93,12 +93,12 @@
 ## Running Docker Container
 - Example:
 ```
-docker container run -d -p 5000:5000 in28min/hello-world-nodejs:0.0.1.RELEASE
+docker container run -d -p 5000:5000 learnings/hello-world-nodejs:0.0.1.RELEASE
 ```
 ### Explanation
 * `-d` → Detached mode
 * `-p hostPort:containerPort`
-* `in28min/hello-world-nodejs` → Repository
+* `learnings/hello-world-nodejs` → Repository
 * `0.0.1.RELEASE` → Tag/version
 
 ## Dockerfile – Basic Version
