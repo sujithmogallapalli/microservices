@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>com.learning</groupId>
 	<artifactId>currency-exchange-service</artifactId>
-	<version>0.0.11-SNAPSHOT</version>
+	<version>0.0.12-SNAPSHOT</version>
 	<name>currency-exchange-service</name>
 	<description>Currency exchange microservice</description>
 	<url/>
